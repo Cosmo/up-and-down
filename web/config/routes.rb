@@ -1,5 +1,12 @@
 Web::Application.routes.draw do
-  resources :parties
+  resources :questions
+
+  resources :users
+
+  resources :parties do
+    resource :user
+    resources :questions
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
