@@ -1,1 +1,68 @@
-Test
+<html>
+    <head>
+        <title>Up N Down</title>
+    </head>
+    <body style="background-color:#000; font-family: segoe ui, arial;">
+        
+        <table style="margin:100px auto; padding: 50px; background-color:rgb(131, 125, 125);">
+            <tr>
+                <td id="items">
+                    <!-- put items here -->
+                    Please join and get the party started!
+                </td>
+                <td rowspan="2">
+                    <!-- QR code + group ID -->
+                    <div id="qr"></div>
+                    <div>
+                        Scan the QR code or visit
+                        <h3 id="joinUrl"></h3>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td id="people">
+                    &nbsp;
+                </td>
+            </tr>
+        </table>
+        
+        <!-- JS -->
+        <script src="http://code.jquery.com/jquery-1.7.1.min.js" type="text/javascript"></script>
+        <script src="qrcode.min.js" type="text/javascript"></script>
+        <script src="http://js.pusher.com/2.1/pusher.min.js" type="text/javascript"></script>
+        <script type="text/javascript">
+
+            $(document).ready(function() {
+
+                var vanityId = "";
+                var getGroup = "http://10.45.40.119:3000/parties/";
+                var joinGroupUrl = "http://10.45.40.119:3000/join/";
+                $.ajax({
+                    type: "GET",
+                    url: getGroup,
+                    async: false,
+                    success: function(data) {
+
+                        $("#items").empty();
+                        $.each(data.items, function (key, value) {
+                            $("#items").append($("div").html(value.toString()));
+                        });
+
+                        vanityId = data.vanity;
+                        new QRCode(document.getElementById("qr"), "http://upndown.com/parties/" + vanityId);
+                        $("#joinUrl").html(joinGroupUrl + data.vanity);
+
+                    }
+                });
+
+                var pusher = new Pusher('46ca20df50350d13e678');
+                var channel = pusher.subscribe("x" + vanityId);
+                channel.bind('event', function(data) {
+                    alert(data.message);
+                });
+
+            });
+        </script>
+
+    </body>
+</html>
