@@ -21,15 +21,15 @@ class QuestionViewController < UIViewController
     
     self.upButton = UIButton.alloc.initWithFrame(CGRectMake(0, 0, 0, 0)).tap do |button|
       button.addTarget(self, action:"up:", forControlEvents:UIControlEventTouchUpInside)
-      # button.setBackgroundImage(UIImage.imageNamed("Up-Button-Background.png"), forState:UIControlStateNormal)
-      button.backgroundColor = UIColor.colorWithRed(255/255.0, green:0/255.0, blue:0/255.0, alpha:1.0)
+      button.setBackgroundImage(UIImage.imageNamed("Up-Button-Background.png"), forState:UIControlStateNormal)
+      # button.backgroundColor = UIColor.colorWithRed(0/255.0, green:255/255.0, blue:0/255.0, alpha:1.0)
       self.view.addSubview(button)
     end
     
     self.downButton = UIButton.alloc.initWithFrame(CGRectMake(0, 0, 0, 0)).tap do |button|
       button.addTarget(self, action:"down:", forControlEvents:UIControlEventTouchUpInside)
-      # button.setBackgroundImage(UIImage.imageNamed("Down-Button-Background.png"), forState:UIControlStateNormal)
-      button.backgroundColor = UIColor.colorWithRed(0/255.0, green:255/255.0, blue:0/255.0, alpha:1.0)
+      button.setBackgroundImage(UIImage.imageNamed("Down-Button-Background.png"), forState:UIControlStateNormal)
+      # button.backgroundColor = UIColor.colorWithRed(255/255.0, green:0/255.0, blue:0/255.0, alpha:1.0)
       self.view.addSubview(button)
     end
     
