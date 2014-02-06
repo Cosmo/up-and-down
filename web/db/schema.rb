@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140205220825) do
+ActiveRecord::Schema.define(version: 20140206190844) do
 
   create_table "answers", force: true do |t|
     t.integer  "question_id"
@@ -24,6 +24,29 @@ ActiveRecord::Schema.define(version: 20140205220825) do
   add_index "answers", ["question_id"], name: "index_answers_on_question_id"
   add_index "answers", ["user_id"], name: "index_answers_on_user_id"
 
+  create_table "movies", force: true do |t|
+    t.string   "name"
+    t.string   "poster_url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "movies_parties", force: true do |t|
+    t.integer "movie_id"
+    t.integer "party_id"
+  end
+
+  add_index "movies_parties", ["movie_id"], name: "index_movies_parties_on_movie_id"
+  add_index "movies_parties", ["party_id"], name: "index_movies_parties_on_party_id"
+
+  create_table "movies_questions", force: true do |t|
+    t.integer "movie_id"
+    t.integer "question_id"
+  end
+
+  add_index "movies_questions", ["movie_id"], name: "index_movies_questions_on_movie_id"
+  add_index "movies_questions", ["question_id"], name: "index_movies_questions_on_question_id"
+
   create_table "parties", force: true do |t|
     t.string   "vanity"
     t.datetime "created_at"
@@ -31,7 +54,6 @@ ActiveRecord::Schema.define(version: 20140205220825) do
   end
 
   create_table "questions", force: true do |t|
-    t.integer  "party_id"
     t.string   "text"
     t.datetime "created_at"
     t.datetime "updated_at"

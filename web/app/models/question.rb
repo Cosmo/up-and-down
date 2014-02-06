@@ -1,4 +1,4 @@
 class Question < ActiveRecord::Base
-  belongs_to :party
   has_many :answers
+  has_and_belongs_to_many :movies
 end

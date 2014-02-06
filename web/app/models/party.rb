@@ -2,7 +2,8 @@ class Party < ActiveRecord::Base
   before_create :generate_vanity
 
   has_many :users
-  has_many :questions
+  has_and_belongs_to_many :movies
+  has_many :questions, :through => :movies
 
   def generate_vanity
     begin

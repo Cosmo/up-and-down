@@ -1,4 +1,6 @@
 Web::Application.routes.draw do
+  resources :movies
+
   resources :questions
 
   resources :users

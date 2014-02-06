@@ -2,23 +2,45 @@ class PartiesController < ApplicationController
   def create
     party = Party.create
 
-    party.questions.create(text: "Biography")
-    party.questions.create(text: "Most Popular")
-    party.questions.create(text: "Leonardo DiCaprio")
-    party.questions.create(text: "Martin Scorsese")
-    party.questions.create(text: "Kate Winslet")
-    party.questions.create(text: "Romance")
-    party.questions.create(text: "90s")
-    party.questions.create(text: "Academy Awards nominee")
-    party.questions.create(text: "Comedy")
-    party.questions.create(text: "Recent Release")
+    Movie.all.each do |movie|
+      party.movies << movie
+    end
 
     render json: party
   end
 
+  def index
+    render json: "Works!"
+  end
+
   def show
     party = Party.where(vanity: params[:id]).first
+    users = party.users.any? ? party.users : nil
 
-    render json: { users: party.users, movies: nil }
+    movies = {}
+    party.users.each do |user|
+      user.answers.each do |answer|
+        movie = answer.movies.first
+        movies[movie.id] = movie
+
+        if answer.upped
+          movies[movie.id].upped
+        else
+          movies[movie.id].downed
+        end
+      end
+    end
+
+    # counted_movies = {}
+    # movies.each do |movie|
+    #   if counted_movie = counted_movies[movie.id]
+    #     counted_movie["count"] =+ 1
+    #   else
+    #     counted_movie = movie
+    #     counted_movie["count"] = 1
+    #   end
+    # end
+
+    render json: { users: users, movies: movies }
   end
 end
