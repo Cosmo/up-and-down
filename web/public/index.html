@@ -5,8 +5,8 @@
             .item {
                 background-color: #eee;
                 border: 1px #ccc solid;
-                width: 80px;
-                height: 120px;
+                width: 100px;
+                height: 150px;
                 margin-right: 15px;
                 margin-bottom: 15px;
                 float: left
@@ -67,10 +67,10 @@
                     url: getGroup + vanityId,
                     async: false,
                     success: function (data) {
-                        if (data.movies != null) {
+                        if (data != null) {
                             $("#items").empty();
                             $.each(data, function (key, value) {
-                                $("#items").append($("<img class=\"item\" width='80px' src=\"" + value.poster_url + "\"/>"));
+                                $("#items").append($("<img class=\"item\" width='100px' src=\"" + value.poster_url + "\"/>"));
                             });
                         }
                         //if (data.users != null) {
@@ -82,7 +82,7 @@
                     }
                 });
 
-                setTimeout(updateView, 2000);
+                setTimeout(updateView, 5000);
             }
 
             $(document).ready(function () {
