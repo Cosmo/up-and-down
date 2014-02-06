@@ -2,13 +2,13 @@ class QuestionsController < ApplicationController
   before_filter :fetch_user, :only => [:index, :update]
 
   def index
-    render json: @user.answers.where(upped: nil), :include => :question
+    render json: @user.answers.where(upped: nil).group(:question_id), :include => :question
   end
 
   def update
-    question = @user.answers.where(params[:question_id]).first
+    question = @user.answers.where(params[:id]).first
 
-    question.update_attributes(:upped => request.body.read)
+    question.update_attributes!(:upped => params[:upped])
 
     render json: question
   end

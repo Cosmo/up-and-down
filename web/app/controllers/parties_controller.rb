@@ -21,24 +21,27 @@ class PartiesController < ApplicationController
     party.users.each do |user|
       user.answers.each do |answer|
         movie = answer.movies.first
-        
+
         if movies[movie.id]
-          movies[movie.id] = movie
+          movies[movie.id].upped += 1
         else
-          puts "set"
+          movies[movie.id] = movie
+          movies[movie.id].upped = 1
         end
+        
+        # if answer.upped
+        #   if movies[movie.id] == nil
+        #     movies[movie.id] = movie
+        #     movies[movie.id].upped = 1
+        #   else
+        #     movies[movie.id].upped += 1
+        #   end
+        # end
       end
     end
 
-    # counted_movies = {}
-    # movies.each do |movie|
-    #   if counted_movie = counted_movies[movie.id]
-    #     counted_movie["count"] =+ 1
-    #   else
-    #     counted_movie = movie
-    #     counted_movie["count"] = 1
-    #   end
-    # end
+    # render :json => { users: users, movie.to_json(:methods => :upped) }
+    # render json: movies.to_json(:methods => :upped)
 
     render json: { users: users, movies: movies }
   end
