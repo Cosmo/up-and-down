@@ -59,9 +59,10 @@
             $(document).ready(function() {
 
                 var vanityId = $.cookie("vanity");
-                var getGroup = "http://10.1.4.10:3000/parties/";
-                var joinGroupUrl = "http://10.1.4.10:3000/join/";
-                var joinUrl = "http://10.1.4.10:3000/parties/" + vanityId;
+                var serviceUri = "http://10.1.4.10:3000/";
+                var getGroup = serviceUri + "parties/";
+                var joinGroupUrl = serviceUri + "join/";
+                var joinUrl = serviceUri + "parties/" + vanityId;
 
                 if (vanityId == undefined) {
                     $.ajax({
