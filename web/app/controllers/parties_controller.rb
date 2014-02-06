@@ -21,12 +21,11 @@ class PartiesController < ApplicationController
     party.users.each do |user|
       user.answers.each do |answer|
         movie = answer.movies.first
-        movies[movie.id] = movie
-
-        if answer.upped
-          movies[movie.id].upped
+        
+        if movies[movie.id]
+          movies[movie.id] = movie
         else
-          movies[movie.id].downed
+          puts "set"
         end
       end
     end

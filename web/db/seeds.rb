@@ -16,7 +16,7 @@ question8 = Question.create(text: "Academy Awards nominee")
 question9 = Question.create(text: "Comedy")
 question10 = Question.create(text: "Recent Release")
 
-movie = Movie.create(name: "The Wolf of Wall Street")
+movie = Movie.create(name: "The Wolf of Wall Street", poster_url: "http://ia.media-imdb.com/images/M/MV5BMjIxMjgxNTk0MF5BMl5BanBnXkFtZTgwNjIyOTg2MDE@._V1_SX640_SY720_.jpg")
 movie.questions << question1
 movie.questions << question2
 movie.questions << question3
@@ -25,7 +25,7 @@ movie.questions << question8
 movie.questions << question9
 movie.questions << question10
 
-movie = Movie.create(name: "Titanic")
+movie = Movie.create(name: "Titanic", poster_url: "http://media.tumblr.com/tumblr_mejqzszPbZ1rxcj5p.jpg")
 movie.questions << question1
 movie.questions << question5
 movie.questions << question6
