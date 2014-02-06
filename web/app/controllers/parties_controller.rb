@@ -40,6 +40,8 @@ class PartiesController < ApplicationController
       end
     end
 
+    movies = movies.any? ? movies : nil
+
     # render :json => { users: users, movie.to_json(:methods => :upped) }
     # render json: movies.to_json(:methods => :upped)
 
