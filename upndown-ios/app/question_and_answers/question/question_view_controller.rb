@@ -38,10 +38,14 @@ class QuestionViewController < UIViewController
   
   def up(sender)
     NSLog("up")
+    
+    self.parentViewController.setViewControllers([self.parentViewController.viewControllerAtIndex(self.index, withState:2)], direction:UIPageViewControllerNavigationDirectionForward, animated:true, completion:lambda { |finished|  })
   end
   
   def down(sender)
     NSLog("down")
+    
+    self.parentViewController.setViewControllers([self.parentViewController.viewControllerAtIndex(self.index, withState:0)], direction:UIPageViewControllerNavigationDirectionReverse, animated:true, completion:lambda { |finished|  })
   end
   
   def viewWillLayoutSubviews

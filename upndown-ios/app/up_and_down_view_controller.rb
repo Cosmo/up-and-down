@@ -8,12 +8,12 @@ class UpAndDownViewController < UIPageViewController
     
     
     self.questions = [
-      { upped: true,  text: "Michael Fassbender" },
-      { upped: false, text: "80s" },
-      { upped: true,  text: "Recently released" },
-      { upped: true,  text: "Comedy" },
-      { upped: true,  text: "Popular" },
-      { upped: true,  text: "R-Rating" }
+      { state: 1, text: "Michael Fassbender" },
+      { state: 1, text: "80s" },
+      { state: 1, text: "Recently released" },
+      { state: 1, text: "Comedy" },
+      { state: 1, text: "Popular" },
+      { state: 1, text: "R-Rating" }
     ]
     
     viewController = self.viewControllerAtIndex(0)
