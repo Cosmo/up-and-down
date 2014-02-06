@@ -88,7 +88,7 @@
 
             $(document).ready(function () {
 
-                vanityId = $.cookie("vanity");
+                vanityId = $.cookie("vanityId");
                 serviceUri = "10.45.40.119:3000/";
                 getGroup = "http://" + serviceUri + "parties/";
                 var joinGroupUrl = "http://" + serviceUri + "parties/";
@@ -101,7 +101,7 @@
                         async: false,
                         success: function (data) {
                             vanityId = data.vanity.toString();
-                            $.cookie('vanity', vanityId, { expires: 7, path: '/' });
+                            $.cookie('vanityId', vanityId, { expires: 7, path: '/' });
                         }
                     });
                 }
