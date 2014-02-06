@@ -82,7 +82,7 @@
                     }
                 });
 
-                setTimeout(updateView, 5000);
+                setTimeout(updateView, 3000);
             }
 
             $(document).ready(function () {
@@ -91,7 +91,7 @@
                 serviceUri = "10.45.40.119:3000/";
                 getGroup = "http://" + serviceUri + "parties/";
                 var joinGroupUrl = "http://" + serviceUri + "parties/";
-                var joinUrl = "upanddown://" + serviceUri + "parties/" + vanityId;
+                var joinUrl = "upanddown://" + serviceUri + "parties/6403";
 
                 if (vanityId == undefined) {
                     $.ajax({
