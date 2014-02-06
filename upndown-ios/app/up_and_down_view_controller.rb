@@ -6,6 +6,11 @@ class UpAndDownViewController < UIPageViewController
     
     self.dataSource = self
     
+    appDelegate = UIApplication.sharedApplication.delegate
+    
+    BW::HTTP.get("http://#{appDelegate.host}:#{appDelegate.port}/parties/#{appDelegate.partyId}/questions") do |response|
+      p response.body.to_str
+    end
     
     self.questions = [
       { state: 1, text: "Michael Fassbender" },
