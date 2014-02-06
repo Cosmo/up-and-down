@@ -7,8 +7,8 @@ class JoinViewController < UIViewController
     self.view.backgroundColor = UIColor.blackColor
     
     self.hintLabel = UILabel.alloc.initWithFrame(CGRectMake(0, 0, 0, 0)).tap do |label|
-      label.text                            = "Scan QR-Code"
-      label.font                            = UIFont.boldSystemFontOfSize(44)
+      label.text                            = "Scan QR-Code (this is also the loading screen after starting the app from a qr-code ...)"
+      label.font                            = UIFont.boldSystemFontOfSize(32)
       label.numberOfLines                   = 0
       label.adjustsLetterSpacingToFitWidth  = true
       label.adjustsFontSizeToFitWidth       = true

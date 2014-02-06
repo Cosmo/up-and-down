@@ -72,5 +72,3 @@ movie = Movie.create(name: "Hugo Cabret", poster_url: "http://upload.wikimedia.o
 movie.questions << question4
 movie.questions << question8
 movie.questions << question9
-
-
