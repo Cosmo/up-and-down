@@ -32,10 +32,12 @@
                 </td>
                 <td rowspan="2" style="padding: 25px;">
                     <!-- QR code + group ID -->
-                    <div id="qr"></div>
+                    <a class="joinUrl" href="#">
+                      <div id="qr"></div>
+                    </a>
                     <div>
                         <h1>Scan the QR code or visit</h1>
-                        <h4 id="joinUrl"></h4>
+                        <a class="joinUrl">Join</a>
                     </div>
                 </td>
             </tr>
@@ -59,7 +61,9 @@
             $(document).ready(function() {
 
                 var vanityId = $.cookie("vanity");
-                var serviceUri = "http://10.45.40.119:3000/";
+                var serviceHost = "10.45.40.119";
+                var serviceUri = "http://"+serviceHost+":3000/";
+                var appUrl = "upanddown://"+serviceHost+":3000/";
                 var getGroup = serviceUri + "parties/";
                 var joinGroupUrl = serviceUri + "parties/";
                 var joinUrl = serviceUri + "parties/" + vanityId;
@@ -78,7 +82,7 @@
                 }
 
                 new QRCode(document.getElementById("qr"), joinUrl);
-                $("#joinUrl").html(joinGroupUrl + vanityId);
+                $(".joinUrl").attr("href", appUrl + vanityId);
 
                 $.ajax({
                     type: "GET",

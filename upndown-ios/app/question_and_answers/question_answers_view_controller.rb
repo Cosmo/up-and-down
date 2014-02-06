@@ -60,13 +60,32 @@ class QuestionAnswersViewController < UIPageViewController
     
     move = false
     
+    appDelegate = UIApplication.sharedApplication.delegate
+    
+    id = appDelegate.upDownController.questions[self.index]["id"]
+    
     case pageViewController.viewControllers.last.class.to_s
     when "UpViewController"
       NSLog("Up")
       move = true
+      
+      
+      BW::HTTP.put("http://#{appDelegate.host}:#{appDelegate.port}/parties/#{appDelegate.partyId}/questions/#{id}", { payload: { upped: "true" } }) do |response|
+        if response.ok?
+          puts "#{id} upped"
+        end
+      end
+      
     when "DownViewController"
       NSLog("Down")
       move = true
+      
+      BW::HTTP.put("http://#{appDelegate.host}:#{appDelegate.port}/parties/#{appDelegate.partyId}/questions/#{id}", { payload: { upped: "false" } }) do |response|
+        if response.ok?
+          puts "#{id} down"
+        end
+      end
+      
     when "QuestionViewController"
       NSLog("Question")
     end

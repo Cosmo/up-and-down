@@ -12,7 +12,7 @@ class QuestionViewController < UIViewController
     self.view.backgroundColor = UIColor.blackColor
     
     self.questionLabel = UILabel.alloc.initWithFrame(CGRectMake(0, 0, 0, 0)).tap do |label|
-      label.text                            = UIApplication.sharedApplication.delegate.upDownController.questions[self.index][:text]
+      label.text                            = UIApplication.sharedApplication.delegate.upDownController.questions[self.index]["question"]["text"]
       label.font                            = UIFont.boldSystemFontOfSize(44)
       label.numberOfLines                   = 0
       label.adjustsLetterSpacingToFitWidth  = true
@@ -23,13 +23,13 @@ class QuestionViewController < UIViewController
     end
     
     self.upButton = UIButton.alloc.initWithFrame(CGRectMake(0, 0, 0, 0)).tap do |button|
-      button.addTarget(self, action:"up:", forControlEvents:UIControlEventTouchUpInside)
+      # button.addTarget(self, action:"up:", forControlEvents:UIControlEventTouchUpInside)
       button.setBackgroundImage(UIImage.imageNamed("Up-Button-Background.png"), forState:UIControlStateNormal)
       self.view.addSubview(button)
     end
     
     self.downButton = UIButton.alloc.initWithFrame(CGRectMake(0, 0, 0, 0)).tap do |button|
-      button.addTarget(self, action:"down:", forControlEvents:UIControlEventTouchUpInside)
+      # button.addTarget(self, action:"down:", forControlEvents:UIControlEventTouchUpInside)
       button.setBackgroundImage(UIImage.imageNamed("Down-Button-Background.png"), forState:UIControlStateNormal)
       self.view.addSubview(button)
     end

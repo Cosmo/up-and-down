@@ -36,10 +36,15 @@ class AppDelegate
         # NSLog("works.")
         NSLog(response.body.to_str)
         
+        BW::HTTP.get("http://#{self.host}:#{self.port}/parties/#{self.partyId}/questions") do |response|
+          
+          puts (BW::JSON.parse(response.body.to_str))
+          
+          self.upDownController = UpAndDownViewController.alloc.initWithTransitionStyle(UIPageViewControllerTransitionStyleScroll, navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal, options: { "UIPageViewControllerOptionInterPageSpacingKey" => NSNumber.numberWithFloat(15.0) })
+          self.upDownController.questions = (BW::JSON.parse(response.body.to_str))
+          self.joinViewController.presentViewController(self.upDownController, animated:true, completion:nil)
+        end
         
-        self.upDownController = UpAndDownViewController.alloc.initWithTransitionStyle(UIPageViewControllerTransitionStyleScroll, navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal, options: { "UIPageViewControllerOptionInterPageSpacingKey" => NSNumber.numberWithFloat(15.0) })
-        
-        self.joinViewController.presentViewController(self.upDownController, animated:true, completion:nil)
       elsif response.status_code.to_s =~ /40\d/
         App.alert("40x, Failed")
       else

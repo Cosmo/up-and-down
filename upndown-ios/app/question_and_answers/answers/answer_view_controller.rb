@@ -8,7 +8,7 @@ class AnswerViewController < UIViewController
     super
     
     self.questionLabel = UILabel.alloc.initWithFrame(CGRectMake(0, 0, 0, 0)).tap do |label|
-      label.text                            = UIApplication.sharedApplication.delegate.upDownController.questions[self.index][:text]
+      label.text                            = UIApplication.sharedApplication.delegate.upDownController.questions[self.index]["question"]["text"]
       label.font                            = UIFont.boldSystemFontOfSize(44)
       label.numberOfLines                   = 0
       label.adjustsLetterSpacingToFitWidth  = true
