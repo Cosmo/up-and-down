@@ -69,7 +69,7 @@
                     success: function (data) {
                         if (data.movies != null) {
                             $("#items").empty();
-                            $.each(data.movies, function (key, value) {
+                            $.each(data, function (key, value) {
                                 $("#items").append($("<img class=\"item\" width='80px' src=\"" + value.poster_url + "\"/>"));
                             });
                         }
@@ -82,7 +82,7 @@
                     }
                 });
 
-                setTimeout(updateView, 3000);
+                setTimeout(updateView, 2000);
             }
 
             $(document).ready(function () {
@@ -108,7 +108,7 @@
                 new QRCode(document.getElementById("qr"), joinUrl);
                 $(".joinUrl").attr("href", joinUrl);
 
-                setTimeout(updateView, 5000);
+                setTimeout(updateView, 2000);
             });
         </script>
 
