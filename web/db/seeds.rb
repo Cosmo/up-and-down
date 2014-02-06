@@ -31,3 +31,30 @@ movie.questions << question5
 movie.questions << question6
 movie.questions << question7
 movie.questions << question8
+
+movie = Movie.create(name: "Revolutionary Road")
+movie.questions << question1
+movie.questions << question5
+movie.questions << question6
+movie.questions << question8
+
+movie = Movie.create(name: "Malavita - The Family")
+movie.questions << question4
+movie.questions << question10
+movie.questions << question9
+
+movie = Movie.create(name: "Shutter Island")
+movie.questions << question1
+movie.questions << question4
+
+movie = Movie.create(name: "The Holiday")
+movie.questions << question5
+movie.questions << question6
+movie.questions << question8
+movie.questions << question9
+
+movie = Movie.create(name: "All the King's Men")
+movie.questions << question5
+movie.questions << question6
+movie.questions << question8
+movie.questions << question9
