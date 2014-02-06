@@ -21,5 +21,20 @@ class AppDelegate
     self.partyId  = url.path.split("/").last
     
     NSLog("Handle url event: #{url.absoluteString}")
+    
+    data = { name: "Klaus" }
+    BW::HTTP.post("http://#{self.host}:#{self.port}/parties/#{self.partyId}/user", {payload: data}) do |response|
+      if response.ok?
+        # json = BW::JSON.parse(response.body.to_str)
+        # p json['id']
+        NSLog("works.")
+        NSLog(response.body.to_str)
+      elsif response.status_code.to_s =~ /40\d/
+        App.alert("40x, Failed")
+      else
+        App.alert(response.error_message)
+      end
+    end
+    
   end
 end
