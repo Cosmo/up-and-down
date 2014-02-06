@@ -5,6 +5,7 @@ class QuestionAnswersViewController < UIPageViewController
     super
     
     self.dataSource = self
+    self.delegate   = self
     
     viewController = self.viewControllerAtIndex(self.index, withState:1)
     self.setViewControllers([viewController], direction: UIPageViewControllerNavigationDirectionForward, animated:true, completion: nil)
@@ -51,5 +52,34 @@ class QuestionAnswersViewController < UIPageViewController
     end
 
     return self.viewControllerAtIndex(self.index, withState:state)
+  end
+  
+  # def presentationCountForPageViewController(pageViewController)
+  #   3
+  # end
+  # 
+  # def presentationIndexForPageViewController(pageViewController)
+  #   self.state
+  # end
+  
+  def pageViewController(pageViewController, didFinishAnimating:finished, previousViewControllers:previousViewControllers, transitionCompleted:completed)
+    
+    puts pageViewController.viewControllers.last.class
+    
+    case pageViewController.viewControllers.last.class.to_s
+    when "UpViewController"
+      NSLog("Up")
+    when "DownViewController"
+      NSLog("Down")
+    when "QuestionViewController"
+      NSLog("Question")
+    end
+    
+    # puts "lol"
+    # NSLog(pageViewController.viewControllers.lastObject.state)
+    # def finished
+    #   # NSLog(pageViewController.viewControllers.lastObject.state)
+    #   NSLog("lol")
+    # end
   end
 end
