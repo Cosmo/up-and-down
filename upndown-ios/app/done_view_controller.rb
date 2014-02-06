@@ -4,6 +4,8 @@ class DoneViewController < UIViewController
   def viewDidLoad
     super
     
+    self.view.backgroundColor = UIColor.yellowColor
+    
     self.doneLabel = UILabel.alloc.initWithFrame(CGRectMake(0, 0, 0, 0)).tap do |label|
       label.text                            = "Done! Look at the TV-Screen."
       label.font                            = UIFont.boldSystemFontOfSize(44)
@@ -11,7 +13,7 @@ class DoneViewController < UIViewController
       label.adjustsLetterSpacingToFitWidth  = true
       label.adjustsFontSizeToFitWidth       = true
       label.textAlignment                   = NSTextAlignmentCenter
-      label.textColor                       = UIColor.whiteColor
+      label.textColor                       = UIColor.blackColor
       self.view.addSubview(label)
     end
   end

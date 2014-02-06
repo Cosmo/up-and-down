@@ -54,4 +54,9 @@ class UpAndDownViewController < UIPageViewController
     return self.viewControllerAtIndex(index)
   end
   
+  def showDone
+    viewController = DoneViewController.alloc.init
+    self.presentViewController(viewController, animated:true, completion:nil)
+  end
+  
 end

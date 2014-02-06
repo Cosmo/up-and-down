@@ -79,6 +79,7 @@ class QuestionAnswersViewController < UIPageViewController
       end
     else
       NSLog("END!")
+      self.parentViewController.showDone
     end
     
   end
