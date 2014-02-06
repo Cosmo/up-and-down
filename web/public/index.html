@@ -1,6 +1,17 @@
 <html>
     <head>
         <title>Up N Down</title>
+        <style type="text/css">
+            .item {
+                background-color: #eee;
+                border: 1px #ccc solid;
+                width: 120px;
+                height: 180px;
+                margin-right: 20px;
+                margin-bottom: 20px;
+                float: left
+            }
+        </style>
     </head>
     <body style="background-color:#000; font-family: segoe ui, arial;">
         
@@ -8,12 +19,12 @@
             <tr>
                 <td id="items">
                     <!-- put items here -->
-                    <div style="background-color:#eee; border: 1px #ccc solid; width:200px; height: 320px; float: left;"></div>
-                    <div style="background-color:#eee; border: 1px #ccc solid; width:200px; height: 320px; float: left;"></div>
-                    <div style="background-color:#eee; border: 1px #ccc solid; width:200px; height: 320px; float: left;"></div>
-                    <div style="background-color:#eee; border: 1px #ccc solid; width:200px; height: 320px; float: left;"></div>
-                    <div style="background-color:#eee; border: 1px #ccc solid; width:200px; height: 320px; float: left;"></div>
-                    <div style="background-color:#eee; border: 1px #ccc solid; width:200px; height: 320px; float: left;"></div>
+                    <div class="item"></div>
+                    <div class="item"></div>
+                    <div class="item"></div>
+                    <div class="item"></div>
+                    <div class="item"></div>
+                    <div class="item"></div>
                     <div style="clear: both;"></div>
                 </td>
                 <td rowspan="2" style="padding: 25px;">
@@ -42,8 +53,9 @@
             $(document).ready(function() {
 
                 var vanityId = $.cookie("vanity");
-                var getGroup = "http://100.64.9.47:3000/parties/";
-                var joinGroupUrl = "http://100.64.9.47:3000/join/";
+                var getGroup = "http://10.1.4.10:3000/parties/";
+                var joinGroupUrl = "http://10.1.4.10:3000/join/";
+                var joinUrl = "http://10.1.4.10:3000/parties/" + vanityId;
 
                 if (vanityId == undefined) {
                     $.ajax({
@@ -58,7 +70,7 @@
                     });
                 }
 
-                new QRCode(document.getElementById("qr"), "http://upndown.com/parties/" + vanityId);
+                new QRCode(document.getElementById("qr"), joinUrl);
                 $("#joinUrl").html(joinGroupUrl + vanityId);
 
                 $.ajax({
