@@ -17,30 +17,32 @@ class PartiesController < ApplicationController
     party = Party.where(vanity: params[:id]).first
     users = party.users.any? ? party.users : nil
 
-    movies = Movie.all
+    grouped_movies = {}
 
+    movies = Movie.all
     movies.each do |movie|
-      movie.upped = 1
+      grouped_movies[movie.id] = movie
     end
 
-    # movies = {}
-    # party.users.each do |user|
-    #   user.answers.each do |answer|
-    #     movie = answer.movies.first
+    party.users.each do |user|
+      user.answers.each do |answer|
+        movie = answer.movies.first
 
-    #     movies[movie.id] = movie
+        grouped_movies[movie.id] = movie
 
-    #     if answer.upped
-    #       movies[movie.id].upped = (movies[movie.id].upped || 0) + 1
-    #     end
-    #   end
-    # end
+        if answer.upped == nil
+          answer.upped = 1
+        else
+          answer.upped = answer.upped
+        end
+      end
+    end
 
-    movies = movies.any? ? movies : nil
+    grouped_movies = grouped_movies.any? ? grouped_movies : nil
 
     # render :json => { users: users, movie.to_json(:methods => :upped) }
     # render json: movies.to_json(:methods => :upped)
 
-    render json: movies, methods: :upped
+    render json: grouped_movies, methods: :upped
   end
 end
