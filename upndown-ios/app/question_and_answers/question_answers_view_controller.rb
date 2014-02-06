@@ -9,6 +9,8 @@ class QuestionAnswersViewController < UIPageViewController
     
     viewController = self.viewControllerAtIndex(self.index, withState:1)
     self.setViewControllers([viewController], direction: UIPageViewControllerNavigationDirectionForward, animated:true, completion: nil)
+    
+    $vc = self
   end
   
   def viewControllerAtIndex(index, withState:state)
@@ -54,32 +56,30 @@ class QuestionAnswersViewController < UIPageViewController
     return self.viewControllerAtIndex(self.index, withState:state)
   end
   
-  # def presentationCountForPageViewController(pageViewController)
-  #   3
-  # end
-  # 
-  # def presentationIndexForPageViewController(pageViewController)
-  #   self.state
-  # end
-  
   def pageViewController(pageViewController, didFinishAnimating:finished, previousViewControllers:previousViewControllers, transitionCompleted:completed)
     
-    puts pageViewController.viewControllers.last.class
+    move = false
     
     case pageViewController.viewControllers.last.class.to_s
     when "UpViewController"
       NSLog("Up")
+      move = true
     when "DownViewController"
       NSLog("Down")
+      move = true
     when "QuestionViewController"
       NSLog("Question")
     end
     
-    # puts "lol"
-    # NSLog(pageViewController.viewControllers.lastObject.state)
-    # def finished
-    #   # NSLog(pageViewController.viewControllers.lastObject.state)
-    #   NSLog("lol")
-    # end
+    index = self.index+1
+    
+    if(index < self.parentViewController.questions.count)
+      if move
+        self.parentViewController.setViewControllers([self.parentViewController.viewControllerAtIndex(index)], direction:UIPageViewControllerNavigationDirectionForward, animated:true, completion:lambda { |finished|  })
+      end
+    else
+      NSLog("END!")
+    end
+    
   end
 end
