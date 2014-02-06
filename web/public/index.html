@@ -58,31 +58,11 @@
         <script src="http://js.pusher.com/2.1/pusher.min.js" type="text/javascript"></script>
         <script type="text/javascript">
 
-            $(document).ready(function() {
+            var vanityId;
+            var serviceUri;
+            var getGroup;
 
-                var vanityId = $.cookie("vanity");
-                var serviceHost = "10.45.40.119";
-                var serviceUri = "http://"+serviceHost+":3000/";
-                var appUrl = "upanddown://"+serviceHost+":3000/";
-                var getGroup = serviceUri + "parties/";
-                var joinGroupUrl = serviceUri + "parties/";
-                var joinUrl = serviceUri + "parties/" + vanityId;
-
-                if (vanityId == undefined) {
-                    $.ajax({
-                        type: "POST",
-                        url: getGroup,
-                        async: false,
-                        success: function(data) {
-                            vanityId = data.vanity.toString();
-                            $.cookie("vanity", vanityId);
-                            $.cookie('vanity', vanityId, { expires: 7, path: '/' });
-                        }
-                    });
-                }
-
-                new QRCode(document.getElementById("qr"), joinUrl);
-                $(".joinUrl").attr("href", appUrl + vanityId);
+            function updateView() {
 
                 $.ajax({
                     type: "GET",
@@ -91,7 +71,7 @@
                     success: function (data) {
                         if (data.movies != null) {
                             $("#items").empty();
-                            $.each(data.movies, function(key, value) {
+                            $.each(data.movies, function (key, value) {
                                 $("#items").append($("div").addClass("item").html(value.toString()));
                             });
                         }
@@ -104,12 +84,33 @@
                     }
                 });
 
-                var pusher = new Pusher('46ca20df50350d13e678');
-                var channel = pusher.subscribe("x" + vanityId);
-                channel.bind('event', function(data) {
-                    alert(data.message);
-                });
+                setTimeout(updateView, 5000);
+            }
 
+            $(document).ready(function () {
+
+                vanityId = $.cookie("vanity");
+                serviceUri = "10.45.40.119:3000/";
+                getGroup = "http://" + serviceUri + "parties/";
+                var joinGroupUrl = "http://" + serviceUri + "parties/";
+                var joinUrl = "upanddown://" + serviceUri + "parties/" + vanityId;
+
+                if (vanityId == undefined) {
+                    $.ajax({
+                        type: "POST",
+                        url: getGroup,
+                        async: false,
+                        success: function (data) {
+                            vanityId = data.vanity.toString();
+                            $.cookie('vanity', vanityId, { expires: 7, path: '/' });
+                        }
+                    });
+                }
+
+                new QRCode(document.getElementById("qr"), joinUrl);
+                $(".joinUrl").attr("href", joinGroupUrl + vanityId);
+
+                setTimeout(updateView, 5000);
             });
         </script>
 
