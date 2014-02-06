@@ -41,6 +41,6 @@ class PartiesController < ApplicationController
     # render :json => { users: users, movie.to_json(:methods => :upped) }
     # render json: movies.to_json(:methods => :upped)
 
-    render json: movies, methods: :upped
+    render json: movies.take(5).shuffle, methods: :upped
   end
 end
