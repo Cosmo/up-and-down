@@ -20,8 +20,11 @@ class UpAndDownViewController < UIPageViewController
     self.setViewControllers([viewController], direction: UIPageViewControllerNavigationDirectionForward, animated:true, completion: nil)
   end
   
+  def preferredStatusBarStyle
+    UIStatusBarStyleLightContent
+  end
+  
   def viewControllerAtIndex(index)
-    # questionViewController = QuestionViewController.alloc.init
     questionViewController = QuestionAnswersViewController.alloc.initWithTransitionStyle(UIPageViewControllerTransitionStyleScroll, navigationOrientation:UIPageViewControllerNavigationOrientationVertical, options: { "UIPageViewControllerOptionInterPageSpacingKey" => NSNumber.numberWithFloat(15.0) })
     questionViewController.index = index
     questionViewController
